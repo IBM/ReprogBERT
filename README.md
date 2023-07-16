@@ -14,9 +14,10 @@ We leverage Model Reprogramming to repurpose a pretrained English language model
 <p align="center">
   <img src="imgs/infill_overview.png" width="60%">
 </p>
+
 Overview of the proposed Protein Sequence Infilling using Model Reprogramming. Given a heavy chain of an antibody, the goal is to design three Complementarity-Determining Regions (CDR-H1, CDR-H2, CDR-H3), shown in green, blue and red colors, using information from the rest of the protein. 
 The infilling problem is formulated similar to the masked-language modeling task, where the missing amino acids are marked with a token MASK and the model generates tokens to infill them.
-In ReprogBert the English language BERT remains unchanged and frozen (source domain), and we introduce additional amino acid embeddings (target domain) together with the linear matrices $\theta$ ($V_t \times V_s$) and $\gamma$ ($V_s \times V_t$) to project from one domain to another.
+In ReprogBert the English language BERT remains unchanged and frozen (source domain), and we introduce additional amino acid embeddings (target domain) together with the linear matrices `theta` (V_t x V_s) and `gamma` (V_s x V_t) to project from one domain to another.
 During CDR infilling training, only the projection matrices and protein embeddings are fine-tuned, the language model remains unmodified. 
 
 ## ProtBert and EnglishBert
