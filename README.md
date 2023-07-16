@@ -12,24 +12,24 @@ We leverage Model Reprogramming to repurpose a pretrained English language model
 
 ## ReprogBert
 <p align="center">
-  <img src="imgs/infill_overview.png" width="40%">
+  <img src="imgs/infill_overview.png" width="60%">
 </p>
 Overview of the proposed Protein Sequence Infilling using Model Reprogramming. Given a heavy chain of an antibody, the goal is to design three Complementarity-Determining Regions (CDR-H1, CDR-H2, CDR-H3), shown in green, blue and red colors, using information from the rest of the protein. 
 The infilling problem is formulated similar to the masked-language modeling task, where the missing amino acids are marked with a token MASK and the model generates tokens to infill them.
-In ReprogBert the English language BERT remains unchanged and frozen (source domain), and we introduce additional amino acid embeddings (target domain) together with the linear matrices <img src="https://latex.codecogs.com/gif.image?\inline&space;\large&space;\dpi{120}\theta\in\mathbb{R}^{|V_t|\times|V_s|}" title="\theta\in\mathbb{R}^{|V_t|\times|V_s|}" />  and <img src="https://latex.codecogs.com/gif.image?\inline&space;\large&space;\dpi{120}\gamma\in\mathbb{R}^{|V_s|\times|V_t|}" title="\gamma\in\mathbb{R}^{|V_s|\times|V_t|}" />  to project from one domain to another.
+In ReprogBert the English language BERT remains unchanged and frozen (source domain), and we introduce additional amino acid embeddings (target domain) together with the linear matrices $\theta$ ($V_t \times V_s$) and $\gamma$ ($V_s \times V_t$) to project from one domain to another.
 During CDR infilling training, only the projection matrices and protein embeddings are fine-tuned, the language model remains unmodified. 
 
 ## ProtBert and EnglishBert
 Aditionally, we included two simple baselines to compare against ReprogBert.
 <p align="center">
-  <img src="imgs/infill_baselines.png" width="80%">
+  <img src="imgs/infill_baselines.png" width="100%">
 </p>
 
 The top diagram shows ProtBert, the BERT model that has been pretrained on the protein sequences and therefore can be applied to the protein infilling task as is
 (the entire model is still fine-tuned on the downstream infilling task). 
 The bottom diagram shows traditional English language BERT model EnglishBert, whose incompatible word embeddings 
-($V_s \times h$, $V_s$ is the number of language tokens, $h$ - latent model dimension) are swapped with the trainable amino acid embeddings 
-($V_t \times h$, $V_t$ is the number of amino acid tokens). The full model is then fine-tuned on the infilling dataset.
+($V_s \times h$, where $V_s$ is the number of language tokens, and $h$ is the latent model dimension) are swapped with the trainable amino acid embeddings 
+($V_t \times h$, where $V_t$ is the number of amino acid tokens). The full model is then fine-tuned on the infilling dataset.
 
 ## Environment
 Our code requires the following packages:
